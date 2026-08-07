@@ -2,10 +2,6 @@
 
 A simple weather app built with Flutter as an introduction to mobile development. It fetches live weather data from a public API and displays it in a clean, dark-themed UI.
 
-## Screenshots
-
-> *(Add a screenshot of your app here)*
-
 ## Features
 
 - Live weather data fetched from [Open-Meteo](https://open-meteo.com/) (no API key required)
