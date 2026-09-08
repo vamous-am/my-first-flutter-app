@@ -6,9 +6,10 @@ A simple weather app built with Flutter as an introduction to mobile development
 
 - Live weather data fetched from [Open-Meteo](https://open-meteo.com/) (no API key required)
 - Displays current temperature, wind speed, humidity, and precipitation
-- Weather condition icon changes based on actual weather code
-- Hourly forecast section (placeholder)
-- Dark themed UI with floating navigation bar
+- Weather condition icon (sunny / cloudy / rainy) driven by WMO weather codes
+- Loading indicator while fetching and a Retry button on network error
+- Hourly forecast section (static placeholder — API hourly data not wired up)
+- Dark themed UI with a custom floating pill navigation bar
 
 ## Tech Stack
 
@@ -74,13 +75,21 @@ https://api.open-meteo.com/v1/forecast
 
 Coordinates are fixed to **Addis Ababa, Ethiopia**.
 
+## Known Limitations
+
+- Location is hardcoded to Addis Ababa — no search or GPS support
+- Hourly forecast cards show static placeholder data, not real hourly API data
+- Bottom nav bar icons (Search, Notifications, Map) and the header icons are decorative — no navigation is wired up
+- `apparent_temperature` is fetched and stored in the model but not rendered anywhere in the UI
+- Debug `print` statements remain active in `WeatherService` (harmless, but worth cleaning before a real release)
+
 ## What I Learned
 
 - Structuring a Flutter project with separated concerns (models, services, screens, widgets)
-- Making asynchronous HTTP requests and handling loading/error states
-- Building custom UI components with Flutter widgets
-- Working with JSON APIs and mapping responses to Dart data classes
-- Managing state in a `StatefulWidget` using `setState`
+- Making asynchronous HTTP requests and handling loading/error states with `setState`
+- Mapping WMO weather codes to assets and descriptions with pure functions
+- Building fully custom UI components (status bar, floating nav, metric cards) without relying on Material defaults
+- Working with the `http` package and `json.decode` to map API responses to typed Dart models
 
 ## License
 
