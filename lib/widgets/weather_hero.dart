@@ -100,6 +100,18 @@ class WeatherHero extends StatelessWidget {
           ),
         ),
 
+        const SizedBox(height: 4),
+
+        // --- Feels Like ---
+        Text(
+          'Feels like ${weather.apparentTemperature.round()}°C',
+          style: const TextStyle(
+            color: Colors.white38,
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+
         const SizedBox(height: 20),
       ],
     );
