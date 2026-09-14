@@ -19,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
   String? _errorMessage;
 
+  // Current city — defaults to Addis Ababa
+  String _cityName = 'Addis Ababa';
+  String _cityCountry = 'Ethiopia';
+  double _lat = kDefaultLat;
+  double _lon = kDefaultLon;
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _errorMessage = null;
     });
     try {
-      final weather = await WeatherService.fetchCurrentWeather();
+      final weather = await WeatherService.fetchCurrentWeather(
+        lat: _lat,
+        lon: _lon,
+      );
       setState(() {
         _weather = weather;
         _isLoading = false;
@@ -41,6 +50,23 @@ class _HomeScreenState extends State<HomeScreen> {
         _errorMessage = e.toString();
         _isLoading = false;
       });
+    }
+  }
+
+  // Opens the city search dialog. On selection, updates state and reloads weather.
+  Future<void> _openCitySearch() async {
+    final result = await showDialog<CityResult>(
+      context: context,
+      builder: (_) => const _CitySearchDialog(),
+    );
+    if (result != null) {
+      setState(() {
+        _cityName = result.name;
+        _cityCountry = result.country;
+        _lat = result.lat;
+        _lon = result.lon;
+      });
+      _loadWeather();
     }
   }
 
@@ -268,7 +294,11 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         _buildStatusBar(),
         _buildAppHeader(),
-        WeatherHero(weather: _weather!),
+        WeatherHero(
+          weather: _weather!,
+          cityName: _cityName,
+          cityCountry: _cityCountry,
+        ),
         const SizedBox(height: 16),
         MetricsRow(weather: _weather!),
         const SizedBox(height: 24),
@@ -300,7 +330,10 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildNavIcon(Icons.home_rounded, isActive: true),
-          _buildNavIcon(Icons.search_rounded),
+          GestureDetector(
+            onTap: _openCitySearch,
+            child: _buildNavIcon(Icons.search_rounded),
+          ),
           _buildNavIcon(Icons.notifications_none_rounded),
           _buildNavIcon(Icons.map_outlined),
         ],

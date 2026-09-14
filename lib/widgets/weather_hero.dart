@@ -6,10 +6,14 @@ import '../services/weather_icon_mapper.dart';
 
 class WeatherHero extends StatelessWidget {
   final CurrentWeather weather;
+  final String cityName;
+  final String cityCountry;
 
   const WeatherHero({
     super.key,
     required this.weather,
+    required this.cityName,
+    required this.cityCountry,
   });
 
   @override
@@ -20,18 +24,18 @@ class WeatherHero extends StatelessWidget {
     return Column(
       children: [
         // --- Location ---
-        const Text(
-          'Addis Ababa',
-          style: TextStyle(
+        Text(
+          cityName,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.5,
           ),
         ),
-        const Text(
-          'Ethiopia',
-          style: TextStyle(
+        Text(
+          cityCountry,
+          style: const TextStyle(
             color: Colors.white60,
             fontSize: 12,
             letterSpacing: 0.3,
