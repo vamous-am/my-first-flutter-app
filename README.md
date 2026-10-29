@@ -79,11 +79,11 @@ Coordinates are fixed to **Addis Ababa, Ethiopia**.
 
 - Location is hardcoded to Addis Ababa — no search or GPS support
 - Hourly forecast cards show static placeholder data, not real hourly API data
-- Bottom nav bar icons (Search, Notifications, Map) and the header icons are decorative — no navigation is wired up
+- Bottom nav bar icons (Search, Notifications, Map) & the header icons are decorative — no navigation is wired up
 - `apparent_temperature` is fetched and stored in the model but not rendered anywhere in the UI
 - Debug `print` statements remain active in `WeatherService` (harmless, but worth cleaning before a real release)
 
-## What I Learned
+## What I Learned from building it
 
 - Structuring a Flutter project with separated concerns (models, services, screens, widgets)
 - Making asynchronous HTTP requests and handling loading/error states with `setState`
@@ -93,4 +93,4 @@ Coordinates are fixed to **Addis Ababa, Ethiopia**.
 
 ## License
 
-Open source — feel free to use or build on this.
+Open source - feel free to use or build on this.
